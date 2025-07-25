@@ -1,8 +1,11 @@
+{{!Header}}
+
 <header>
   <a class="site-logo" href="/">
-    Auth Example! 🕵️
+    AnimeFind
   </a>
   {{#if isLoggedIn}}
+    <a href="/watchlist">Watchlist</a>
     <a href="/api/logout">Logout</a>
   {{else}}
     <a href="/login">Login</a>
