@@ -1,25 +1,59 @@
 {{!Home Page}}
 
-{{> header}}
+<header>
+  <div class="home-navbar">
+    <a class="site-logo" href="/">
+      AnimeFind
+    </a>
+    {{#if isLoggedIn}}
+      <a href="/watchlist">Watchlist</a>
+      <a href="/api/logout">Logout</a>
+    {{else}}
+      <a href="/login">Login</a>
+      <a href="/signup">Sign Up</a>
+    {{/if}}
+  </div>
+  <div class="hero-section">
+    {{#if isLoggedIn}}
+      <div>
+        <h1>Welcome Back!</h1>
+        <p>Your watchlist awaits</p>
+      </div>
+    {{else}}
+      <div>
+        <h1>Discover the stories waiting for you</h1>
+        <p><a href="/login">Log in</a> or <a href="/signup">sign up</a> to keep track of your favorites</p>
+      </div>
+    {{/if}}
+  </div>
+</header>
+
 <main>
-  <section class="homepage_hero"></section>
-  <section class="content">
-    <h1>Discover the World of Anime</h1>
-    <section class="top-trending">
-      <h2>Popular Shows</h2>
-      <div class="top-trending_container">
-        {{#each topFiveData}}
-           <div class="top-trending_card">
-            <img src="{{this.images.jpg.image_url}}" alt="{{this.title_english}}" width="150">
-            <p>{{this.title_english}}</p>
+  <section class="home-content">
+    <section class="popular">
+      <div class="sub-header">
+        <hr class="horizontal-line">
+        <h2>Popular</h2>
+        <hr class="horizontal-line">
+      </div>
+      <p>Dive into the anime world’s biggest hits. These top-ranked series are making waves across the globe</p>
+      <div class="popular_container">
+        {{#each popularAnime}}
+           <div class="popular_card">
+            <a href="/details?animeId={{this.mal_id}}"><img src="{{this.images.jpg.image_url}}" alt="{{this.animeTitle}}"></a>
+            <a href="/details?animeId={{this.mal_id}}"><p>{{this.animeTitle}}</p></a>
           </div>
         {{/each}}
       </div>
     </section>
 
-    <section class="genre-search">
-      <h2>Genres</h2>
-      <p>Click the buttons below to explore the different genres anime has to offer</p>
+    <section class="genres">
+      <div class="sub-header">
+        <hr class="horizontal-line">
+        <h2>Genres</h2>
+        <hr class="horizontal-line">
+      </div>
+      <p>Click the buttons below to browse anime by genre and discover hidden gems</p>
       <div class="genre-links">
         <a href="/genres?genre=1">Action</a>
         <a href="/genres?genre=2">Adventure</a>
@@ -39,11 +73,10 @@
     </section>
 
     <section class="search">
-      <h2>Looking for Something Specific?</h2>
-      <p>Search through catalog</p>
-      <form class="search-form" action="/routes/apiRoutes.js" method="POST">
-        <label for="anime-search">Enter Anime Name</label>
-        <input name="search" type="text" placeholder="Anime Name">
+      <h2>Know what you're looking for?</h2>
+      <p>Use the search bar below to find the story that matters to you</p>
+      <form class="search-form" action="/search-results" method="GET">
+        <input name="q" type="text" placeholder="Anime Name" required minlength="5">
         <button type="submit">Search</button>
       </form>
     </section>

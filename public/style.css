@@ -1,93 +1,190 @@
 :root {
-  --black: #000000;
-  --white: #ffffff;
-  --pastel-gray-azure: #b3c7d0;
-  --light-azure: #d1dbe2;
-  --light-gray: #d9d9d9;
+  --primary-black: #000000;
+  --primary-white: #ffffff;
+  --primary-red: #d8443a;
   --font-size: 18px;
 }
 
 * {
   box-sizing: border-box;
-}
-
-body {
   padding: 0;
   margin: 0;
+  background-color: var(--primary-black);
+  font-family: 'Rubik', sans-serif;
 }
 
-header {
+p, h1, h2{
+  color: var(--primary-white);
+}
+
+.home-navbar {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--black);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.9); 
+  z-index: 1000;
   padding: 18px;
 }
 
 header .site-logo {
-  font-size: calc(var(--font-size) * 1.5);
+  font-size: calc(18px * 1.5);
   margin-right: auto;
 }
 
 .site-logo {
   text-align: center;
-  color: var(--white);
+  color: var(--primary-white);
   text-decoration: none;
-  margin: calc(var(--space) * 4) auto;
+  margin: 4 auto;
   display: block;
-  font-size: calc(var(--font-size) * 2.5);
+  font-size: 30px;
   font-weight: bold;
+  padding-left: 20px;
 }
 
-a {
-  color: var(--white);
+.home-navbar a{
+  color: var(--primary-white);
   transition: color 200ms;
+  padding: 0 7px;
 }
-a:hover,
+.home-navbar a:hover,
 a:focus {
-  color: var(--light-gray);
+  color: var(--primary-red);
 }
 
-.content{
-  margin: 0 auto;
-  max-width: 1000px;
+.hero-section {
+  background-image: url(images/restaurant.jpg);
+  background-position: center;
+  max-width: 1920px;
+  height: 500px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-section h1{
+  font-size: 48px;
+  font-weight: bold;
+  background-color: var(--primary-red);
   text-align: center;
-}
-
-h1 {
+  text-transform:capitalize;
+  padding: 0 0 5px 0;
   margin: 0;
 }
 
-.homepage_hero {
-  background-image: url(images/anime-japan.jpg);
-  background-position: center;
-   max-width: 1920px;
-  height: 400px;
+.hero-section p{
+  background-color: var(--primary-red);
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  text-transform:capitalize;
+  padding: 0;
+  margin: 0;
 }
 
-.top-trending_container{
+.hero-section div a{
+  color: var(--primary-white);
+  background-color: var(--primary-red);
+}
+
+.hero-section div{
+  background-color: var(--primary-red);
+  padding: 20px;
+}
+
+/* Home Page Styleing */
+.home-content{
+  margin: 0 auto;
+  /* max-width: 1100px; */
+  text-align: center;
+}
+
+
+/* Popular section styling */
+.popular, 
+.genres, 
+.search{
+  margin: 20px 70px;
+}
+
+.sub-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: center;
+}
+
+.horizontal-line {
+  flex: 1; 
+  border: none;
+  border-top: 2px solid var(--primary-white); 
+}
+
+.sub-header h2 {
+  white-space: nowrap;
+  margin: 20px 0 20px 0;
+  font-size: 30px;
+}
+
+.popular_container{
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   overflow: auto;
   white-space: nowrap;
   scroll-snap-type: x mandatory;
+  gap: 10px;
 }
 
-.top-trending_card{
+.popular_card{
+  width: 160px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  margin: 20px;
   flex: 0 0 auto;
+  padding: 10px;
+  margin-right: 10px;
 }
 
+.popular_card a{
+  text-decoration: none;
+  text-align: center;
+}
+
+.popular_card a p{
+  margin: 10px 0;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.popular_card a img{
+  width: 160px;
+}
+
+/* Genre Section Styling */
 .genre-links a{
-  color: black;
-  background-color: red;
+  background-color: var(--primary-red);
   border-radius: 5px;
   padding: 10px;
-  margin: 0 5px 10px 0;
+  margin: 0 10px 20px 0;
+  color: var(--primary-white);
+  transition: color 200ms;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.genre-links a:hover,
+a:focus {
+  color: var(--primary-black);
 }
 
 .genre-links{
@@ -96,41 +193,64 @@ h1 {
   max-width: 700px;
   align-items: center;
   justify-content: center;
-  margin: 0 auto;
+  margin: 20px auto;
 }
 
-main,
-main form {
-  border-radius: 4px;
+/* Search section styling */
+
+.search h2{
+  font-size: 30px;
+  margin: 20px 0;
+  padding-top: 10px;
 }
 
-
-button.btn {
-  border: var(--text-color);
-  border-radius: 4px;
-  background-color: var(--secondary-light);
-  padding: calc(var(--space) * 0.75) calc(var(--space) * 2);
-  cursor: pointer;
-  transition: background-color 200ms;
+.search,
+.search div,
+.search h2,
+.search p,
+.search form,
+.search label{
+  background-color: var(--primary-red);
 }
-button.btn-text {
+
+.search{
+  width: 100vw;
+  margin: 40px 0 0 0;
+  padding-bottom: 20px;
+}
+
+.search input{
+  font-size: 1rem;
+  padding: 10px 70px 10px 10px;
   border: none;
-  background-color: transparent;
-  color: var(--secondary-light);
-  transition: 200ms;
+  border-radius: 5px;
+  margin-right: 5px;
+  background-color: var(--primary-white);
+  text-align: left;
+}
+
+.search form{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.search button{
+  margin: 10px 0;
+  padding: 10px 20px;
+  background-color: var(--primary-white);
+  border: none;
+  border-radius: 10px;
+  color: black;
   cursor: pointer;
-}
-
-button.btn:hover,
-button.btn:focus {
-  background-color: var(--secondary);
-}
-button.btn-text:hover,
-button.btn-text:focus {
-  color: var(--secondary);
+  transition: 100ms;
+  text-transform: uppercase;
 }
 
 
+/* Login page Styling */
 
 .login-form {
   display: flex;
@@ -148,10 +268,12 @@ button.btn-text:focus {
   padding: calc(var(--space) * 0.5) calc(var(--space) * 1);
 }
 
+/* Footer styling */
 footer{
-  background-color: var(--black);
-  padding: 18px;
+  padding: 20px;
   margin-top: 20px;
+  text-align: center;
+  font-weight: bold;
 }
 
 @media screen and (max-width: 700px) {

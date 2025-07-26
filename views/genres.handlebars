@@ -5,8 +5,8 @@
 <h1>{{genreName}}</h1>
 <div>
     {{#each genreAnimeList}}
-        <img src="{{this.images.jpg.image_url}}" alt="{{this.title_english}}" width="150">
-        <p>{{this.title_english}}</p>
+        <a href="/details?animeId={{this.mal_id}}"><img src="{{this.images.jpg.image_url}}" alt="{{this.animeTitle}}" width="150"></a>
+        <a href="/details?animeId={{this.mal_id}}"><p>{{this.animeTitle}}</p></a>
     {{/each}}
 </div>
 

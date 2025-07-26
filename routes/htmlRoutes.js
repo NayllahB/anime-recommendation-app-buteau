@@ -1,24 +1,38 @@
 const router = require("express").Router();
 const controllers = require("../controllers");
 const checkAuth = require("../middleware/auth");
-const {topFiveAnime, genreName} = require("../controllers/anime");
-const {getGenres} = require("../controllers/anime");
-const {getGenreName} = require("../controllers/anime")
+const {
+  getPopularAnime,
+  getAnimeDetails, 
+  getGenreName, 
+  getGenres,
+  getSearchData
+} = require("../controllers/anime");
 
 //GET homepage
 // Shows home page (content depend on if user is logged in)
 router.get("/", async (req, res) => {
   try {
-    const topFiveData = await topFiveAnime();
+    const popularAnime = await getPopularAnime();
     const isLoggedIn = req.session.isLoggedIn;
-    res.render("index", { topFiveData, isLoggedIn });
+    res.render("index", { popularAnime, isLoggedIn });
   } catch(err){
-    res.status(502).send('API Not Available')
-    console.log(err)
+    res.status(404).send(err.message)
   }
 });
 
-// renders list shows by genre
+//renders anime details page
+router.get("/details", async (req, res) => {
+  try{
+    const animeId = req.query.animeId;
+    const animeDetails = await getAnimeDetails(animeId);
+    res.render("details" , {animeDetails});
+  }catch(err){
+    res.status(404).send(err.message);
+  }
+})
+
+// renders list of shows by genre
 router.get("/genres", async (req, res)=>{
   try{
     const genreId = req.query.genre;
@@ -26,10 +40,20 @@ router.get("/genres", async (req, res)=>{
     const genreAnimeList = await getGenres(genreId);
     res.render("genres", {genreName, genreAnimeList});
   }catch(err){
-    res.status(502).send('API Not Available')
-    console.log(err)
+    res.status(404).send(err.message);
   }
 });
+
+//renders query search results
+router.get("/search-results", async (req, res) =>{
+  try{
+    const searchQuery = req.query.q;
+    const searchResults = await getSearchData(searchQuery);
+    res.render("searchResults", {searchResults});
+  }catch(err){
+    res.status(404).send(err.message);
+  }
+})
 
 //GET Login page
 router.get("/login", async (req, res) => {
