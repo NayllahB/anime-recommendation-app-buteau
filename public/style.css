@@ -1,13 +1,9 @@
 :root {
-  --black: #020303;
-  --dark-grey: #171c1c;
-  --light-grey: #a7b9b7;
-  --primary: #5cc1bb;
-  --primary-dark: #41aaa3;
-  --secondary: hsl(15deg 100% 62%);
-  --secondary-light: hsl(15deg 100% 70%);
-  --text-color: #f5fffe;
-  --space: 16px;
+  --black: #000000;
+  --white: #ffffff;
+  --pastel-gray-azure: #b3c7d0;
+  --light-azure: #d1dbe2;
+  --light-gray: #d9d9d9;
   --font-size: 18px;
 }
 
@@ -20,11 +16,87 @@ body {
   margin: 0;
 }
 
-.homepage_hero {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(images/anime-japan.jpg);
-  background-position: center;
-  min-height: 50vh;
+header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--black);
+  padding: 18px;
+}
 
+header .site-logo {
+  font-size: calc(var(--font-size) * 1.5);
+  margin-right: auto;
+}
+
+.site-logo {
+  text-align: center;
+  color: var(--white);
+  text-decoration: none;
+  margin: calc(var(--space) * 4) auto;
+  display: block;
+  font-size: calc(var(--font-size) * 2.5);
+  font-weight: bold;
+}
+
+a {
+  color: var(--white);
+  transition: color 200ms;
+}
+a:hover,
+a:focus {
+  color: var(--light-gray);
+}
+
+.content{
+  margin: 0 auto;
+  max-width: 1000px;
+  text-align: center;
+}
+
+h1 {
+  margin: 0;
+}
+
+.homepage_hero {
+  background-image: url(images/anime-japan.jpg);
+  background-position: center;
+   max-width: 1920px;
+  height: 400px;
+}
+
+.top-trending_container{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: auto;
+  white-space: nowrap;
+  scroll-snap-type: x mandatory;
+}
+
+.top-trending_card{
+  align-items: center;
+  margin: 20px;
+  flex: 0 0 auto;
+}
+
+.genre-links a{
+  color: black;
+  background-color: red;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 0 5px 10px 0;
+}
+
+.genre-links{
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 700px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
 }
 
 main,
@@ -32,14 +104,6 @@ main form {
   border-radius: 4px;
 }
 
-a {
-  color: var(--secondary-light);
-  transition: color 200ms;
-}
-a:hover,
-a:focus {
-  color: var(--secondary);
-}
 
 button.btn {
   border: var(--text-color);
@@ -65,31 +129,8 @@ button.btn-text:hover,
 button.btn-text:focus {
   color: var(--secondary);
 }
-header {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--black);
-}
-header a {
-  margin: var(--space);
-}
-header .site-logo {
-  font-size: calc(var(--font-size) * 1.5);
-  margin: var(--space);
-  margin-right: auto;
-}
 
-.site-logo {
-  text-align: center;
-  color: var(--text-color);
-  text-decoration: none;
-  margin: calc(var(--space) * 4) auto;
-  display: block;
-  font-size: calc(var(--font-size) * 2.5);
-  font-weight: bold;
-}
+
 
 .login-form {
   display: flex;
@@ -105,6 +146,12 @@ header .site-logo {
 .login-form input {
   margin-bottom: calc(var(--space) * 2);
   padding: calc(var(--space) * 0.5) calc(var(--space) * 1);
+}
+
+footer{
+  background-color: var(--black);
+  padding: 18px;
+  margin-top: 20px;
 }
 
 @media screen and (max-width: 700px) {

@@ -2,25 +2,53 @@
 
 {{> header}}
 <main>
-  <section class="homepage_hero">
+  <section class="homepage_hero"></section>
+  <section class="content">
     <h1>Discover the World of Anime</h1>
+    <section class="top-trending">
+      <h2>Popular Shows</h2>
+      <div class="top-trending_container">
+        {{#each topFiveData}}
+           <div class="top-trending_card">
+            <img src="{{this.images.jpg.image_url}}" alt="{{this.title_english}}" width="150">
+            <p>{{this.title_english}}</p>
+          </div>
+        {{/each}}
+      </div>
+    </section>
+
+    <section class="genre-search">
+      <h2>Genres</h2>
+      <p>Click the buttons below to explore the different genres anime has to offer</p>
+      <div class="genre-links">
+        <a href="/genres?genre=1">Action</a>
+        <a href="/genres?genre=2">Adventure</a>
+        <a href="/genres?genre=46">Award Winning</a>
+        <a href="/genres?genre=4">Comedy</a>
+        <a href="/genres?genre=8">Drama</a>
+        <a href="/genres?genre=10">Fantasy</a>
+        <a href="/genres?genre=47">Gourmet</a>
+        <a href="/genres?genre=14">Horror</a>
+        <a href="/genres?genre=7">Mystery</a>
+        <a href="/genres?genre=22">Romance</a>
+        <a href="/genres?genre=25">Shoujo</a>
+        <a href="/genres?genre=27">Shounen</a>
+        <a href="/genres?genre=36">Slice of Life</a>
+        <a href="/genres?genre=30">Sports</a>
+      </div>
+    </section>
+
+    <section class="search">
+      <h2>Looking for Something Specific?</h2>
+      <p>Search through catalog</p>
+      <form class="search-form" action="/routes/apiRoutes.js" method="POST">
+        <label for="anime-search">Enter Anime Name</label>
+        <input name="search" type="text" placeholder="Anime Name">
+        <button type="submit">Search</button>
+      </form>
+    </section>
   </section>
-  <section class="sub-headline">
-    <p>Explore top trending shows or search </p>
-  </section>
-  <section class="top-trending">
-    <h2>Top Trending Shows</h2>
-    <div class="top-trending_card"></div>
-    <ul>
-      {{#each topFiveData}}
-        <li>
-          <img src="{{this.images.jpg.image_url}}" alt="{{this.title_english}}" width="150">
-          <p>{{this.title_english}}</p>
-        </li>
-      {{/each}}
-    </ul>
-  </section>
-  <section class="Search"></section>
+ 
 </main>
 
 {{> footer}}

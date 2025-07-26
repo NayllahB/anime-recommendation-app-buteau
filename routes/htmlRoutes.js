@@ -1,11 +1,13 @@
 const router = require("express").Router();
 const controllers = require("../controllers");
 const checkAuth = require("../middleware/auth");
-const {topFiveAnime} = require("../controllers/anime");
+const {topFiveAnime, genreName} = require("../controllers/anime");
+const {getGenres} = require("../controllers/anime");
+const {getGenreName} = require("../controllers/anime")
 
 //GET homepage
 // Shows home page (content depend on if user is logged in)
-router.get("/", async ( req, res) => {
+router.get("/", async (req, res) => {
   try {
     const topFiveData = await topFiveAnime();
     const isLoggedIn = req.session.isLoggedIn;
@@ -16,6 +18,18 @@ router.get("/", async ( req, res) => {
   }
 });
 
+// renders list shows by genre
+router.get("/genres", async (req, res)=>{
+  try{
+    const genreId = req.query.genre;
+    const genreName = await getGenreName(genreId);
+    const genreAnimeList = await getGenres(genreId);
+    res.render("genres", {genreName, genreAnimeList});
+  }catch(err){
+    res.status(502).send('API Not Available')
+    console.log(err)
+  }
+});
 
 //GET Login page
 router.get("/login", async (req, res) => {
