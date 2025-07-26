@@ -11,42 +11,25 @@
   --font-size: 18px;
 }
 
-body {
-  background-color: var(--primary-dark);
-  color: var(--text-color);
-  font-size: var(--font-size);
-  line-height: 1.5;
-  padding: 0;
-  margin: 0;
-  font-family: helvetica;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+* {
+  box-sizing: border-box;
 }
 
-main {
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 960px;
-  margin: 0 auto;
-  background-color: var(--black);
-  padding: var(--space) calc(var(--space) * 3);
-  text-align: center;
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.homepage_hero {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(images/anime-japan.jpg);
+  background-position: center;
+  min-height: 50vh;
+
 }
 
 main,
 main form {
   border-radius: 4px;
-}
-
-h1 {
-  font-size: calc(var(--font-size) * 2.25);
-}
-h2 {
-  font-size: calc(var(--font-size) * 2);
-}
-h3 {
-  font-size: calc(var(--font-size) * 1.5);
 }
 
 a {
@@ -88,7 +71,6 @@ header {
   justify-content: space-between;
   align-items: center;
   background-color: var(--black);
-  margin-bottom: calc(var(--space) * 6);
 }
 header a {
   margin: var(--space);

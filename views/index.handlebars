@@ -2,8 +2,25 @@
 
 {{> header}}
 <main>
-  <h1>This is the home page!</h1>
-  <p>Currently, you are {{#unless isLoggedIn}} NOT {{/unless}} logged in.</p>
-  <p>You should {{#unless isLoggedIn}}NOT{{/unless}} be able to access <a href="/private">this page</a>.</p>
-  <p>Use the header above to {{#if isLoggedIn}} logout{{else}} login or create an account{{/if}}.</p>
+  <section class="homepage_hero">
+    <h1>Discover the World of Anime</h1>
+  </section>
+  <section class="sub-headline">
+    <p>Explore top trending shows or search </p>
+  </section>
+  <section class="top-trending">
+    <h2>Top Trending Shows</h2>
+    <div class="top-trending_card"></div>
+    <ul>
+      {{#each topFiveData}}
+        <li>
+          <img src="{{this.images.jpg.image_url}}" alt="{{this.title_english}}" width="150">
+          <p>{{this.title_english}}</p>
+        </li>
+      {{/each}}
+    </ul>
+  </section>
+  <section class="Search"></section>
 </main>
+
+{{> footer}}

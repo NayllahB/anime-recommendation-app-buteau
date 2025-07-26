@@ -1,12 +1,21 @@
 const router = require("express").Router();
 const controllers = require("../controllers");
 const checkAuth = require("../middleware/auth");
+const {topFiveAnime} = require("../controllers/anime");
 
 //GET homepage
 // Shows home page (content depend on if user is logged in)
-router.get("/", ({ session: { isLoggedIn } }, res) => {
-  res.render("index", { isLoggedIn });
+router.get("/", async ( req, res) => {
+  try {
+    const topFiveData = await topFiveAnime();
+    const isLoggedIn = req.session.isLoggedIn;
+    res.render("index", { topFiveData, isLoggedIn });
+  } catch(err){
+    res.status(502).send('API Not Available')
+    console.log(err)
+  }
 });
+
 
 //GET Login page
 router.get("/login", async (req, res) => {
@@ -31,5 +40,6 @@ router.get("/signup", async (req, res) => {
 router.get("/private", checkAuth, ({ session: { isLoggedIn } }, res) => {
   res.render("protected", { isLoggedIn });
 });
+
 
 module.exports = router;
