@@ -1,13 +1,20 @@
 {{! Genre Results Page}}
+<header>{{> header}}</header>
 
-{{> header}}
+<section class="genre-results-content">
+    <h1 class="genre-heading">Genre: {{genreName}}</h1>
+    <div class="go-back-container">
+        <a href="/">Go Back</a>
+    </div>
+    <div class="genre-results-list-container">
+        {{#each genreAnimeList}}
+            <div class="genre-results-card">
+                <a href="/details?animeId={{this.mal_id}}"><img src="{{this.images.jpg.image_url}}" alt="{{this.animeTitle}}" width="150"></a>
+                <a href="/details?animeId={{this.mal_id}}">{{this.animeTitle}}</a>
+            </div>
+        {{/each}}
+    </div>
+</section>
 
-<h1>{{genreName}}</h1>
-<div>
-    {{#each genreAnimeList}}
-        <a href="/details?animeId={{this.mal_id}}"><img src="{{this.images.jpg.image_url}}" alt="{{this.animeTitle}}" width="150"></a>
-        <a href="/details?animeId={{this.mal_id}}"><p>{{this.animeTitle}}</p></a>
-    {{/each}}
-</div>
 
 {{> footer}}

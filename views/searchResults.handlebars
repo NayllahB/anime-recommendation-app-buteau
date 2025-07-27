@@ -1,11 +1,21 @@
 
 {{>header}}
 
-<div>
-    {{#each searchResults}}
-        <a href="/details?animeId={{this.mal_id}}"><img src="{{this.images.jpg.image_url}}" alt="{{this.animeTitle}}" width="150"></a>
-        <a href="/details?animeId={{this.mal_id}}"><p>{{this.animeTitle}}</p></a>
-    {{/each}}
-</div>
+<section class="search-results-content">
+    <h1 class="search-heading">Search Results: {{genreName}}</h1>
+
+    <div class="go-back-container">
+        <a href="/">Go Back</a>
+    </div>
+
+    <div class="search-results-list-container">
+        {{#each searchResults}}
+            <div class="search-results-card">
+                <a href="/details?animeId={{this.mal_id}}"><img src="{{this.images.jpg.image_url}}" alt="{{this.animeTitle}}" width="150"></a>
+                <a href="/details?animeId={{this.mal_id}}">{{this.animeTitle}}</a>
+            </div>
+        {{/each}}
+    </div>
+</section>
 
 {{>footer}}

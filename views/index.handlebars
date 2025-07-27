@@ -1,18 +1,7 @@
 {{!Home Page}}
 
 <header>
-  <div class="home-navbar">
-    <a class="site-logo" href="/">
-      AnimeFind
-    </a>
-    {{#if isLoggedIn}}
-      <a href="/watchlist">Watchlist</a>
-      <a href="/api/logout">Logout</a>
-    {{else}}
-      <a href="/login">Login</a>
-      <a href="/signup">Sign Up</a>
-    {{/if}}
-  </div>
+  {{> header}}
   <div class="hero-section">
     {{#if isLoggedIn}}
       <div>
