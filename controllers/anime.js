@@ -1,4 +1,4 @@
-const axios = require('axios')
+const axios = require('axios');
 
 const genreNameList = {
         1: "Action",
@@ -15,7 +15,7 @@ const genreNameList = {
         27: "Shounen",
         36: "Slice of Life",
         30: "Sports" 
-    }
+    };
 
 //pulls data for 10 popular animes
 async function getPopularAnime() {
@@ -27,7 +27,7 @@ async function getPopularAnime() {
         });
         return popularData;
     }catch(err){
-        console.error(`Failed to fetch popular anime: ${err.message}`)
+        console.error(`Failed to fetch popular anime: ${err.message}`);
         throw err;
     }
 }
@@ -41,7 +41,7 @@ async function getAnimeDetails(animeId) {
         return animeDetailsData;
 
     } catch(err){
-        console.error(`Failed to fetch anime details: ${err.message}`)
+        console.error(`Failed to fetch anime details: ${err.message}`);
         throw err;
     }
     
@@ -74,11 +74,11 @@ async function getSearchData(searchQuery) {
         const searchResponse = await axios.get(`https://api.jikan.moe/v4/anime?q=${searchQuery}&sfw=true&limit=25&order_by=popularity`);
         const searchData = searchResponse.data.data;
         searchData.forEach(anime => {
-            anime.animeTitle = anime.title_english || anime.title
+            anime.animeTitle = anime.title_english || anime.title;
         });
         return searchData;
     }catch(err){
-        console.error(`Failed to fetch search results: ${err.message}`)
+        console.error(`Failed to fetch search results: ${err.message}`);
         throw err;
     }
     

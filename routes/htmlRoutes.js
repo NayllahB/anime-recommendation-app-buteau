@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const controllers = require("../controllers");
 const checkAuth = require("../middleware/auth");
+const { watchlist } = require("../models");
 const {
   getPopularAnime,
   getAnimeDetails, 
@@ -26,7 +27,8 @@ router.get("/details", async (req, res) => {
   try{
     const animeId = req.query.animeId;
     const animeDetails = await getAnimeDetails(animeId);
-    res.render("details" , {animeDetails});
+    const isLoggedIn = req.session.isLoggedIn;
+    res.render("details" , {animeDetails, isLoggedIn});
   }catch(err){
     res.status(404).send(err.message);
   }
@@ -38,7 +40,8 @@ router.get("/genres", async (req, res)=>{
     const genreId = req.query.genre;
     const genreName = await getGenreName(genreId);
     const genreAnimeList = await getGenres(genreId);
-    res.render("genres", {genreName, genreAnimeList});
+    const isLoggedIn = req.session.isLoggedIn;
+    res.render("genres", {genreName, genreAnimeList,isLoggedIn});
   }catch(err){
     res.status(404).send(err.message);
   }
@@ -49,7 +52,8 @@ router.get("/search-results", async (req, res) =>{
   try{
     const searchQuery = req.query.q;
     const searchResults = await getSearchData(searchQuery);
-    res.render("searchResults", {searchResults});
+    const isLoggedIn = req.session.isLoggedIn;
+    res.render("searchResults", {searchResults, isLoggedIn});
   }catch(err){
     res.status(404).send(err.message);
   }
@@ -75,9 +79,24 @@ router.get("/signup", async (req, res) => {
 
 //GET protected page
 //Only renders protected page if user is logged in
-router.get("/private", checkAuth, ({ session: { isLoggedIn } }, res) => {
-  res.render("protected", { isLoggedIn });
+router.get("/private", checkAuth, async (req, res) => {
+  try {
+    const userId = req.session.userId;
+
+    if (!userId) {
+      return res.redirect("/login");
+    }
+    const watchlistData = await watchlist.find({ userId }).lean();
+
+    res.render("protected", {
+      isLoggedIn: req.session.isLoggedIn,
+      watchlistData
+    });
+  } catch (err) {
+    res.status(500).send("Error loading watchlist");
+  }
 });
+
 
 
 module.exports = router;

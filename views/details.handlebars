@@ -1,10 +1,40 @@
 {{! Anime Details page}}
 
-{{> header}}
+<header>{{> header}}</header>
 
-<div>
-   <img src="{{animeDetails.images.jpg.image_url}}" alt="{{animeDetails.animeTitle}}">
-   <p>{{animeDetails.animeTitle}}</p>   
+<div class="details-container">
+   <div class="details-top-part">
+      <div class="details-img">
+         <img src="{{animeDetails.images.jpg.image_url}}" alt="{{animeDetails.animeTitle}}">
+      </div>
+      <div class="details-info">
+         <h1 class="anime-name">{{animeDetails.animeTitle}}</h1> 
+         <p class="anime-status"><b>Status:</b> {{animeDetails.status}}</p> 
+         <p class="anime-aired"><b>Aired:</b> {{animeDetails.aired.string}}</p>
+         <p><b>Episodes:</b> {{animeDetails.episodes}}</p>
+         <p>
+            <b>Studio:</b> 
+            {{#each animeDetails.studios}}
+             <a href="{{this.url}}" target="_blank">{{this.name}}</a>{{#unless @last}},{{/unless}}
+            {{/each}} 
+         </p> 
+         <p>
+            <b>Streaming: </b>
+            {{#each animeDetails.streaming}}
+               <a href="{{this.url}}" target="_blank">{{this.name}}</a>{{#unless @last}},{{/unless}}
+            {{/each}}   
+         </p>
+         <form action="/api/private/add" method="POST">
+            <input type="hidden" name="mal_id" value="{{animeDetails.mal_id}}">
+            <input type="hidden" name="title" value="{{animeDetails.animeTitle}}">
+            <input type="hidden" name="image" value="{{animeDetails.images.jpg.image_url}}">
+            <button type="submit">Add to Watchlist</button>
+         </form>
+      </div>
+   </div>
+   <div class="details-bottom-part">
+      <p><b>Synopsis:</b> {{animeDetails.synopsis}}</p>
+   </div>
 </div>
 
 {{> footer}}

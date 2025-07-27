@@ -1,9 +1,28 @@
 {{!Watchlist page}}
+<header>{{> header}}</header>
 
-{{> header}}
 <main>
-  <h1>This is a private page!</h1>
-  <p>You should only be able to see this page if logged in.</p>
-  <p>Currently, you are {{#unless isLoggedIn}} NOT {{/unless}} logged in.</p>
-  <p>Use the header above to {{#if isLoggedIn}} logout{{else}} login or create an account{{/if}}.</p>
+  <div class="watchlist-content">
+    <h1 class="watchlist-heading">My Watchlist</h1>
+    <div class="watchlist-container">
+      {{#if watchlistData.length}}
+        {{#each watchlistData}}
+          <div class="watchlist-card">
+            <a href="/details?animeId={{this.mal_id}}"><img src="{{this.image}}" alt="{{this.title}}" width="150"></a>
+            <a href="/details?animeId={{this.mal_id}}">{{this.title}}</a>
+            <form action="/api/private/delete/{{this._id}}" method="POST" style="display:inline;">
+              <button type="submit">Remove</button>
+            </form>
+          </div>
+        {{/each}}
+        {{else}}
+          <p>Your watchlist is empty</p>
+      {{/if}}
+    </div>
+  </div>
+  
+
+  
 </main>
+
+{{>footer}}
